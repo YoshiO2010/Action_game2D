@@ -23,7 +23,7 @@ public class A_Gliding : Base_ability
     public void Finish_Gliding()
     {
         Rigidbody2D RB = Player.GetComponent<Rigidbody2D>();
-        RB.gravityScale = 1;
+        //RB.gravityScale = 1;
         Gliding_Flag = false;
     }
 }

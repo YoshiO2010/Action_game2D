@@ -14,7 +14,7 @@ public class Game_mane : MonoBehaviour
     float Clear_time;
     [SerializeField]
      TextMeshProUGUI Clear_timeUI;
-    bool Pause_Flag;
+    public bool Pause_Flag;
     [SerializeField]
     GameObject Pause_panel;
     void Start()
@@ -29,18 +29,10 @@ public class Game_mane : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            Pause_Flag = !Pause_Flag;
+            Pause_menu();
+
         }
-        if (Pause_Flag)
-        {
-            Time.timeScale = 0;
-            Pause_panel.SetActive(true);
-        }
-        else
-        {
-            Time.timeScale = 1;
-            Pause_panel.SetActive(false);
-        }
+        
     }
     public void Game_clear()
     {
@@ -57,5 +49,22 @@ public class Game_mane : MonoBehaviour
     {
         SceneManager.LoadScene(scenename);
     }
-   
+   public void Retry_scene()
+    {
+       Load_scene(SceneManager.GetActiveScene().name);
+    }
+    void Pause_menu()
+    {
+        Pause_Flag = !Pause_Flag;
+        if (Pause_Flag)
+        {
+            Time.timeScale = 0;
+            Pause_panel.SetActive(true);
+        }
+        else
+        {
+            Time.timeScale = 1;
+            Pause_panel.SetActive(false);
+        }
+    }
 }

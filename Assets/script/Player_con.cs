@@ -12,6 +12,8 @@ public class Player_con : MonoBehaviour
     bool run;
     Player_status P_status;
     Ability_con a_com;
+    [SerializeField]
+    Ability_sounds A_SE;
     
 
     
@@ -34,7 +36,7 @@ public class Player_con : MonoBehaviour
           animator = GetComponent<Animator>();
         P_status = GetComponent<Player_status>();
         a_com = GetComponent<Ability_con>();
-       
+        A_SE = GetComponent<Ability_sounds>();
     }
 
     // Update is called once per frame
@@ -85,10 +87,12 @@ public class Player_con : MonoBehaviour
                 if (P_status.can_jump())
                 {
                     Jump();
+                    A_SE.Play_SE(A_SE.Jump_SE);
                 }
                 else if (a_com.Abilities["Double_jump"].Isusable(this.gameObject))
                 {
                     a_com.Abilities["Double_jump"].Activate(this.gameObject);
+                    A_SE.Play_SE(A_SE.Double_Jump_SE);
                 }
             }
             if (Input.GetKey(KeyCode.LeftShift))
@@ -144,6 +148,10 @@ public class Player_con : MonoBehaviour
                 break;
 
 
+        }
+        if (P_status.Is_Blink)
+        {
+            return;
         }
         rigidbody2D.velocity = new Vector2(run_speed, rigidbody2D.velocity.y);
 

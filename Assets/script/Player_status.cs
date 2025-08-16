@@ -10,6 +10,7 @@ public class Player_status : MonoBehaviour
     public bool Goal_flag;
     [SerializeField]
     Game_mane mane;
+    public bool Is_Blink;
     // Start is called before the first frame update
     void Start()
     {
