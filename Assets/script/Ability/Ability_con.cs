@@ -7,6 +7,10 @@ public class Ability_con : MonoBehaviour
     [SerializeField]
      public Dictionary<string, I_ability> Abilities = new();
     GameObject Player;
+    [SerializeField]
+    public GameObject Hook_UI;
+    [SerializeField]
+    public GameObject Chain;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,6 +19,7 @@ public class Ability_con : MonoBehaviour
         Abilities["Tackle"] = new A_Tackle();
         Abilities["Gliding"] = new A_Gliding();
         Abilities["Blink"] = new A_Blink();
+        Abilities["Hook"] = new A_Hook();
     }
 
     // Update is called once per frame

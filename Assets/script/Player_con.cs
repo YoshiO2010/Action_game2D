@@ -95,6 +95,13 @@ public class Player_con : MonoBehaviour
                     A_SE.Play_SE(A_SE.Double_Jump_SE);
                 }
             }
+            if (Input.GetMouseButtonDown(0))
+            {
+                if (a_com.Abilities["Hook"].Isusable(this.gameObject))
+                {
+                    a_com.Abilities["Hook"].Activate(this.gameObject);
+                }
+            }
             if (Input.GetKey(KeyCode.LeftShift))
             {
                 run = true;
