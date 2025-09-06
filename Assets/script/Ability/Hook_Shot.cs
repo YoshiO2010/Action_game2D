@@ -16,6 +16,7 @@ public class Hook_Shot : MonoBehaviour
     void Start()
     {
         RB = GetComponent<Rigidbody2D>();
+        Player = GameObject.FindWithTag("Player");
     }
 
     // Update is called once per frame
@@ -23,8 +24,17 @@ public class Hook_Shot : MonoBehaviour
     {
         Vector2 pos = transform.position;
         Vector2 To_Target=Angle-pos;
+        float step= Time.deltaTime* speed;
+       
+        
+        if(To_Target.sqrMagnitude<= step)
+        {
+            Player.GetComponent<Hook_Chain>().Connect_Chain(RB);
+            RB.isKinematic = true;
+            enabled = false;
+            return;
+        }
         transform.position = pos + To_Target.normalized * Time.deltaTime * speed;
-        GetComponent<Hook_Chain>().Connect_Chain(RB);
     }
     public void hook_Shot(Vector2 angle,GameObject Player)
     {

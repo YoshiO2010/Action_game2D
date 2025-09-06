@@ -11,6 +11,8 @@ public class Hook_Chain : MonoBehaviour
     void Start()
     {
         joint = GetComponent<DistanceJoint2D>();
+        joint.enableCollision = false;
+        joint.enabled = false;
         line = GetComponent<LineRenderer>();
     }
 
@@ -38,5 +40,14 @@ public class Hook_Chain : MonoBehaviour
         line.SetPosition(0, transform.position);
         line.SetPosition(1, Hook_body.position);
         Is_Group = true;
+    }
+    public void Cut_Chain()
+    {
+       
+        joint.enabled = false;
+        line.enabled = false;
+        line.positionCount = 0;
+        Is_Group = false;
+
     }
 }

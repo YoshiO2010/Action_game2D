@@ -97,11 +97,24 @@ public class Player_con : MonoBehaviour
             }
             if (Input.GetMouseButtonDown(0))
             {
-                if (a_com.Abilities["Hook"].Isusable(this.gameObject))
+                if (GetComponent<Hook_Chain>().Is_Group == true)
                 {
-                    a_com.Abilities["Hook"].Activate(this.gameObject);
+                    GetComponent<Hook_Chain>().Cut_Chain();
                 }
+                else
+                {
+                    if (a_com.Abilities["Hook"].Isusable(this.gameObject))
+                    {
+                        a_com.Abilities["Hook"].Activate(this.gameObject);
+
+                    }
+                }
+               
+                
+                
+                
             }
+           
             if (Input.GetKey(KeyCode.LeftShift))
             {
                 run = true;
