@@ -11,8 +11,12 @@ public class Ability_con : MonoBehaviour
     public GameObject Hook_UI;
     [SerializeField]
     public GameObject Chain;
+    [SerializeField]
+    GameObject Main_cam;
+    [SerializeField]
+    GameObject Map_cam;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         Player = this.gameObject;
         Abilities["Double_jump"] = new A_Doublejump();
@@ -20,6 +24,9 @@ public class Ability_con : MonoBehaviour
         Abilities["Gliding"] = new A_Gliding();
         Abilities["Blink"] = new A_Blink();
         Abilities["Hook"] = new A_Hook();
+        var a_Map = new A_Map();
+        a_Map.Inject(Main_cam, Map_cam);
+        Abilities["Map"] = a_Map;
     }
 
     // Update is called once per frame

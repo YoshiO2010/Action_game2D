@@ -14,11 +14,14 @@ public class Player_con : MonoBehaviour
     Ability_con a_com;
     [SerializeField]
     Ability_sounds A_SE;
-    
-
-    
+    Hook_Chain chain;
+    [SerializeField]
+    float swingAccel=100f;
+    [SerializeField]
+    bool holdUntil_Jumpable;
     [SerializeField]
     Animator animator;
+    
     public enum DIRECTION_TYPE
     {
         STOP,
@@ -97,9 +100,10 @@ public class Player_con : MonoBehaviour
             }
             if (Input.GetMouseButtonDown(0))
             {
+                holdUntil_Jumpable = true;
                 if (GetComponent<Hook_Chain>().Is_Group == true)
-                {
-                    GetComponent<Hook_Chain>().Cut_Chain();
+                { 
+                    chain.Cut_Chain();
                 }
                 else
                 {
@@ -109,12 +113,17 @@ public class Player_con : MonoBehaviour
 
                     }
                 }
+                
+                
                
                 
                 
                 
             }
-           
+            if (Input.GetKeyDown(KeyCode.M))
+            {
+                a_com.Abilities["Map"].Activate(this.gameObject);
+            }
             if (Input.GetKey(KeyCode.LeftShift))
             {
                 run = true;
@@ -132,16 +141,26 @@ public class Player_con : MonoBehaviour
             }
             else
             {
-                (a_com.Abilities["Gliding"] as A_Gliding).Finish_Gliding();
+                //(a_com.Abilities["Gliding"] as A_Gliding).Finish_Gliding();
             }
-           
+            if (chain != null && chain.Is_Group)
+            {
+                Vector2 anchor = chain.GetAnchor_WorldPos();
+                Vector2 rDir = (anchor - rigidbody2D.position).normalized;
+                Vector2 tan = new Vector2(-rDir.y, rDir.x);
+                float H = Input.GetAxisRaw("Horizontal");
+                rigidbody2D.AddForce(tan * H * swingAccel, ForceMode2D.Force);
+                rigidbody2D.drag = 0.05f;
+            }
+            
         }
         else
         {
             direction = DIRECTION_TYPE.STOP;
             animator.SetFloat("speed", 0);
+           
         }
-        
+       
     }
    void FixedUpdate()
     {
@@ -172,9 +191,20 @@ public class Player_con : MonoBehaviour
         if (P_status.Is_Blink)
         {
             return;
+
+        }
+        if (chain != null && chain.Is_Group)
+        {
+            return;
+
+        }
+        if (holdUntil_Jumpable)
+        {
+            if (!P_status.can_jump()) return;
+            holdUntil_Jumpable = false;
         }
         rigidbody2D.velocity = new Vector2(run_speed, rigidbody2D.velocity.y);
-
+        
     }
     void Jump()
     {

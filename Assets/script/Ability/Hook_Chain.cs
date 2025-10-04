@@ -50,4 +50,16 @@ public class Hook_Chain : MonoBehaviour
         Is_Group = false;
 
     }
+    public Vector2 GetAnchor_WorldPos()
+    {
+        if (!Is_Group)
+        {
+            return (Vector2)transform.position;
+        }
+        if (joint.connectedBody != null)
+        {
+            return joint.connectedBody.position;
+        }
+        return joint.connectedAnchor;
+    } 
 }
