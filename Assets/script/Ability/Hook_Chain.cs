@@ -7,6 +7,7 @@ public class Hook_Chain : MonoBehaviour
     public bool Is_Group;
     DistanceJoint2D joint;
     LineRenderer line;
+    Hook_Shot Hook;
     // Start is called before the first frame update
     void Start()
     {
@@ -40,6 +41,7 @@ public class Hook_Chain : MonoBehaviour
         line.SetPosition(0, transform.position);
         line.SetPosition(1, Hook_body.position);
         Is_Group = true;
+        Hook = Hook_body.transform.GetComponent<Hook_Shot>();
     }
     public void Cut_Chain()
     {
@@ -48,7 +50,7 @@ public class Hook_Chain : MonoBehaviour
         line.enabled = false;
         line.positionCount = 0;
         Is_Group = false;
-
+        Hook.Delete_chain();
     }
     public Vector2 GetAnchor_WorldPos()
     {

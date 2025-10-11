@@ -21,6 +21,7 @@ public class Start_count : MonoBehaviour
     void Start()
     {
         Base_scale = Count_dawn_text.rectTransform.localScale;
+        GameObject.FindWithTag("Player").GetComponent<Player_con>().Move_flag=false;
         StartCoroutine(Count_dwan());
 
     }
@@ -46,6 +47,7 @@ public class Start_count : MonoBehaviour
         yield return new WaitForSecondsRealtime(0.8f);
         Time.timeScale = 1f;
         Count_Panel.SetActive(false);
+        GameObject.FindWithTag("Player").GetComponent<Player_con>().Move_flag = true;
     }
     IEnumerator POP_animation()
     {

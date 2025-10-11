@@ -21,7 +21,7 @@ public class Player_con : MonoBehaviour
     bool holdUntil_Jumpable;
     [SerializeField]
     Animator animator;
-    
+    public bool Move_flag;
     public enum DIRECTION_TYPE
     {
         STOP,
@@ -32,6 +32,8 @@ public class Player_con : MonoBehaviour
     }
     DIRECTION_TYPE direction = DIRECTION_TYPE.STOP;
     Rigidbody2D rigidbody2D;
+    [SerializeField]
+    float Max_Swing;
     // Start is called before the first frame update
     void Start()
     {
@@ -40,12 +42,14 @@ public class Player_con : MonoBehaviour
         P_status = GetComponent<Player_status>();
         a_com = GetComponent<Ability_con>();
         A_SE = GetComponent<Ability_sounds>();
+        chain = GetComponent<Hook_Chain>();
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (P_status.Goal_flag == false)
+        if (P_status.Goal_flag == false&&Move_flag==true)
         {
             float x = Input.GetAxis("Horizontal");
             animator.SetFloat("speed", Mathf.Abs(x));
@@ -102,7 +106,8 @@ public class Player_con : MonoBehaviour
             {
                 holdUntil_Jumpable = true;
                 if (GetComponent<Hook_Chain>().Is_Group == true)
-                { 
+                {
+                    Debug.Log("cut");
                     chain.Cut_Chain();
                 }
                 else
@@ -151,7 +156,11 @@ public class Player_con : MonoBehaviour
                 float H = Input.GetAxisRaw("Horizontal");
                 rigidbody2D.AddForce(tan * H * swingAccel, ForceMode2D.Force);
                 rigidbody2D.drag = 0.05f;
+                float VT=Vector2.Dot(rigidbody2D.velocity,tan);
+                VT = Mathf.Clamp(VT, -Max_Swing, Max_Swing);
+                rigidbody2D.velocity = tan * VT + rDir * Vector2.Dot(rigidbody2D.velocity,rDir);
             }
+
             
         }
         else

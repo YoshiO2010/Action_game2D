@@ -20,15 +20,29 @@ public class A_Blink : Base_ability
         Ability_sounds A_SE = Player.GetComponent<Ability_sounds>();
         P_status.Is_Blink = true;
 
-        RB.velocity = new Vector2(0f, RB.velocity.y);
+        
         Debug.Log("Blink");
         int direction = (int)Player.transform.localScale.x;
-        RB.gravityScale = 0;
-        RB.AddForce(new Vector2(direction * Blink_power, 0),ForceMode2D.Impulse);
+       
         A_SE.Play_SE(A_SE.Blink_SE);
         //RB.MovePosition(new Vector2(direction, 0) * 1f);
         Player.GetComponent<MonoBehaviour>().StartCoroutine(Finish_Blink(RB));
-        
+        Hook_Chain hook=Player.GetComponent<Hook_Chain>();
+        if (hook != null && hook.Is_Group)
+        {
+            Vector2 anchor = hook.GetAnchor_WorldPos();
+            Vector2 rDir = (anchor - RB.position).normalized;
+            Vector2 tan = new Vector2(-rDir.y, rDir.x);
+            Vector2 impulse = tan * -direction * Blink_power;
+            RB.AddForce(impulse, ForceMode2D.Impulse);
+            
+        }
+        else
+        {
+            RB.velocity = new Vector2(0f, RB.velocity.y);
+            RB.gravityScale = 0;
+            RB.AddForce(new Vector2(direction * Blink_power, 0), ForceMode2D.Impulse);
+        }
     }
     public override bool Isusable(GameObject Player)
     {

@@ -11,7 +11,7 @@ public class Hook_Shot : MonoBehaviour
     [SerializeField]
     float speed;
     GameObject Player;
-
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -31,6 +31,7 @@ public class Hook_Shot : MonoBehaviour
         {
             Player.GetComponent<Hook_Chain>().Connect_Chain(RB);
             RB.isKinematic = true;
+            RB.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY;
             enabled = false;
             return;
         }
@@ -38,8 +39,23 @@ public class Hook_Shot : MonoBehaviour
     }
     public void hook_Shot(Vector2 angle,GameObject Player)
     {
-        transform.rotation = Quaternion.Euler(0, 0, -45f);
-      this.Angle = angle;
         this.Player = Player;
+        if (Player.transform.localScale.x== 1)
+        {
+            transform.rotation = Quaternion.Euler(0, 0, -45f);
+            this.Angle = angle;
+        }
+        else
+        {
+            transform.rotation = Quaternion.Euler(0, 0, 45f);
+            this.Angle = angle;
+        }
+       
+     
+        
+    }
+    public void Delete_chain()
+    {
+        Destroy(gameObject);
     }
 }
