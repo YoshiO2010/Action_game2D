@@ -19,7 +19,7 @@ public class A_Blink : Base_ability
         P_status = Player.GetComponent<Player_status>();
         Ability_sounds A_SE = Player.GetComponent<Ability_sounds>();
         P_status.Is_Blink = true;
-
+        P_status.Blink_used = true;
         
         Debug.Log("Blink");
         int direction = (int)Player.transform.localScale.x;
@@ -47,7 +47,7 @@ public class A_Blink : Base_ability
     public override bool Isusable(GameObject Player)
     {
         Player_status P_status = Player.GetComponent<Player_status>();
-        return true;
+        return !P_status.Blink_used;
     }
     IEnumerator Finish_Blink(Rigidbody2D RB)
     {

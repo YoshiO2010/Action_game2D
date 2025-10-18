@@ -22,6 +22,7 @@ public class Player_con : MonoBehaviour
     [SerializeField]
     Animator animator;
     public bool Move_flag;
+
     public enum DIRECTION_TYPE
     {
         STOP,
@@ -207,7 +208,7 @@ public class Player_con : MonoBehaviour
             return;
 
         }
-        if (holdUntil_Jumpable)
+        if (holdUntil_Jumpable&&P_status.Blink_used==false)
         {
             if (!P_status.can_jump()) return;
             holdUntil_Jumpable = false;

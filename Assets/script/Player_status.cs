@@ -11,6 +11,7 @@ public class Player_status : MonoBehaviour
     [SerializeField]
     Game_mane mane;
     public bool Is_Blink;
+    public bool Blink_used;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +29,7 @@ public class Player_status : MonoBehaviour
         if (collision.contacts.Any(c => c.normal.y > 0.5f)) 
         {
             jump_count = 0;
+            Blink_used = false;
         }
        
     }
@@ -48,4 +50,5 @@ public class Player_status : MonoBehaviour
     {
         jump_count++;
     }
+
 }

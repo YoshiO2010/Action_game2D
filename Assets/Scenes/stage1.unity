@@ -2347,6 +2347,7 @@ MonoBehaviour:
   Goal_flag: 0
   mane: {fileID: 0}
   Is_Blink: 0
+  Blink_used: 0
 --- !u!114 &364206800
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2509,7 +2510,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 3cd1e554c0bff274598f51e01a8ea6bd, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2532,7 +2533,6 @@ LineRenderer:
   m_SortingOrder: 0
   m_Positions:
   - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 1}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -2540,8 +2540,8 @@ LineRenderer:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0
-        value: 1
+        time: 0.033521492
+        value: 0.3396225
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -2583,7 +2583,7 @@ LineRenderer:
     numCornerVertices: 0
     numCapVertices: 0
     alignment: 0
-    textureMode: 0
+    textureMode: 1
     shadowBias: 0.5
     generateLightingData: 0
   m_UseWorldSpace: 1
