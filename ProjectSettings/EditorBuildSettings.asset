@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/stage2.unity
     guid: 998b83243cd30444ebf37556cd403744
+  - enabled: 1
+    path: Assets/Scenes/Skill_serect.unity
+    guid: 754c22a2b6e552044aa77258357f4fa3
   m_configObjects: {}

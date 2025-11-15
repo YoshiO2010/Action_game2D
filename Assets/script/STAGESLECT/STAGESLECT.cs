@@ -46,5 +46,8 @@ public class STAGESLECT : MonoBehaviour
         Debug.Log(scenename);
         SceneManager.LoadScene(scenename);
     }
-
+    public void SS_bottn()
+    {
+        SceneManager.LoadScene("Skill_serect");
+    }
 }
