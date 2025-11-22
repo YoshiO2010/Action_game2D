@@ -22,6 +22,7 @@ public class Player_con : MonoBehaviour
     [SerializeField]
     Animator animator;
     public bool Move_flag;
+    Abillty_Cheack Cheack;
 
     public enum DIRECTION_TYPE
     {
@@ -44,7 +45,7 @@ public class Player_con : MonoBehaviour
         a_com = GetComponent<Ability_con>();
         A_SE = GetComponent<Ability_sounds>();
         chain = GetComponent<Hook_Chain>();
-        
+        Cheack = GetComponent<Abillty_Cheack>();
     }
 
     // Update is called once per frame
@@ -74,7 +75,7 @@ public class Player_con : MonoBehaviour
             {
                 direction = DIRECTION_TYPE.RUN_LFET;
             }
-            if (Input.GetKeyDown(KeyCode.Q))
+            if (Input.GetKeyDown(KeyCode.Q)&&Cheack.Tackle)
             {
                 if (a_com.Abilities["Tackle"].Isusable(this.gameObject))
                 {
@@ -83,7 +84,7 @@ public class Player_con : MonoBehaviour
                     
                 } 
             }
-            if (Input.GetKeyDown(KeyCode.E))
+            if (Input.GetKeyDown(KeyCode.E)&&Cheack.Blink)
             {
                 if (a_com.Abilities["Blink"].Isusable(this.gameObject))
                 {
@@ -94,16 +95,20 @@ public class Player_con : MonoBehaviour
             {
                 if (P_status.can_jump())
                 {
+                    animator.SetTrigger("jump");
+                    animator.SetBool("Land", false);
                     Jump();
                     A_SE.Play_SE(A_SE.Jump_SE);
                 }
-                else if (a_com.Abilities["Double_jump"].Isusable(this.gameObject))
+                else if (a_com.Abilities["Double_jump"].Isusable(this.gameObject)&&Cheack.Double_jump)
                 {
+                    animator.SetTrigger("jump");
+
                     a_com.Abilities["Double_jump"].Activate(this.gameObject);
                     A_SE.Play_SE(A_SE.Double_Jump_SE);
                 }
             }
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0)&&Cheack.Hook)
             {
                 holdUntil_Jumpable = true;
                 if (GetComponent<Hook_Chain>().Is_Group == true)
@@ -126,7 +131,7 @@ public class Player_con : MonoBehaviour
                 
                 
             }
-            if (Input.GetKeyDown(KeyCode.M))
+            if (Input.GetKeyDown(KeyCode.M)&&Cheack.Map)
             {
                 a_com.Abilities["Map"].Activate(this.gameObject);
             }
@@ -138,8 +143,9 @@ public class Player_con : MonoBehaviour
             {
                 run = false;
             }
-            if (Input.GetKey(KeyCode.Space))
+            if (Input.GetKey(KeyCode.Space)&&Cheack.Gliding)
             {
+                
                 if (a_com.Abilities["Gliding"].Isusable(this.gameObject))
                 {
                     a_com.Abilities["Gliding"].Activate(this.gameObject);

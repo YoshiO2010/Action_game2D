@@ -2165,6 +2165,7 @@ GameObject:
   - component: {fileID: 364206801}
   - component: {fileID: 364206803}
   - component: {fileID: 364206805}
+  - component: {fileID: 364206806}
   - component: {fileID: 364206804}
   m_Layer: 6
   m_Name: Player body
@@ -2348,6 +2349,7 @@ MonoBehaviour:
   mane: {fileID: 0}
   Is_Blink: 0
   Blink_used: 0
+  animator: {fileID: 0}
 --- !u!114 &364206800
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2607,6 +2609,25 @@ DistanceJoint2D:
   m_AutoConfigureDistance: 1
   m_Distance: 4.3529415
   m_MaxDistanceOnly: 0
+--- !u!114 &364206806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 364206792}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d33589688120fd645871c0d5989843af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  set_skill: []
+  Hook: 0
+  Blink: 0
+  Double_jump: 0
+  Map: 0
+  Gliding: 0
+  Truckle: 0
 --- !u!1 &402230934
 GameObject:
   m_ObjectHideFlags: 3

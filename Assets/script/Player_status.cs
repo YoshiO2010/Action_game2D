@@ -12,10 +12,12 @@ public class Player_status : MonoBehaviour
     Game_mane mane;
     public bool Is_Blink;
     public bool Blink_used;
+    [SerializeField]
+    Animator animator;
     // Start is called before the first frame update
     void Start()
     {
-       
+        animator = GetComponent<Animator>();
         mane = GameObject.FindWithTag("manager").GetComponent<Game_mane>();
     }
 
@@ -24,10 +26,11 @@ public class Player_status : MonoBehaviour
     {
         
     }
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionStay2D(Collision2D collision)
     {
         if (collision.contacts.Any(c => c.normal.y > 0.5f)) 
         {
+            animator.SetBool("Land",true);
             jump_count = 0;
             Blink_used = false;
         }
